@@ -49,6 +49,21 @@
                 </div>
         </header>
 
+        <style>
+            .fade-in { opacity: 0; animation: fadeIn .8s ease forwards; }
+            .delay-1 { animation-delay: .15s; }
+            .delay-2 { animation-delay: .3s; }
+            .delay-3 { animation-delay: .45s; }
+            @keyframes fadeIn { from { opacity: 0; transform: translateY(8px);} to { opacity:1; transform: translateY(0);} }
+            .floaty { animation: floaty 6s ease-in-out infinite; }
+            @keyframes floaty { 0%,100%{ transform: translateY(0);} 50%{ transform: translateY(-6px);} }
+            .shimmer-text { background-image: linear-gradient(90deg,#111827,#4f46e5,#111827); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shimmer 3s linear infinite; }
+            @keyframes shimmer { 0%{ background-position: 200% 0;} 100%{ background-position: -200% 0;} }
+            .glow-btn { position: relative; }
+            .glow-btn::after { content:""; position:absolute; inset:-2px; border-radius:9999px; background: linear-gradient(90deg,#4f46e5,#22d3ee,#16a34a); filter: blur(12px); opacity:.35; z-index:-1; transition: opacity .2s ease; }
+            .glow-btn:hover::after { opacity:.5; }
+        </style>
+
             <!-- Hero section -->
             <div class="pt-16 pb-20">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,20 +73,22 @@
                                 <span class="block xl:inline">Gérez vos finances</span>
                                 <span class="block text-indigo-600 xl:inline">familiales simplement</span>
                             </h1>
-                            <p class="mt-6 text-lg text-gray-600">
+                            <p class="fade-in delay-2 mt-6 text-lg text-gray-600">
                                 FamFinance vous aide à suivre vos revenus, à gérer vos dépenses, à planifier votre budget et à atteindre vos objectifs financiers - tout au même endroit.
                             </p>
                             <div class="mt-8 flex space-x-4">
-                                <a href="{{ route('register') }}" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                                <a href="{{ route('register') }}" class="glow-btn inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full shadow-sm text-white bg-indigo-600 hover:bg-indigo-500 transition-transform duration-200 hover:scale-[1.02]">
                                     {{ __('Commencer gratuitement') }}
+                                    <svg class="ml-2 h-4 w-4 floaty" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                 </a>
-                                <a href="#fonctionnalites" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-indigo-100 hover:bg-indigo-200">
+                                <a href="#fonctionnalites" class="fade-in delay-3 inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-full text-indigo-600 bg-indigo-100 hover:bg-indigo-200">
                                     {{ __('En savoir plus') }}
                                 </a>
                             </div>
                         </div>
-                        <div class="hidden md:block">
-                            <img src="{{ asset('images/12.jpg') }}" alt="Finance management" class="w-full h-auto rounded-lg shadow-xl">
+                        <div class="hidden md:block relative">
+                            <div class="absolute -inset-4 rounded-3xl blur-2xl bg-gradient-to-tr from-indigo-200 via-cyan-200 to-emerald-200 opacity-60"></div>
+                            <img src="{{ asset('images/12.jpg') }}" alt="Finance management" class="relative w-full h-auto rounded-lg shadow-xl ring-1 ring-black/10">
                         </div>
                     </div>
                 </div>

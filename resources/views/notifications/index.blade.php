@@ -62,37 +62,37 @@
                         </form>
                     </div>
 
-                    <div x-data="{ 
+                    <div x-data='{ 
                         notifications: @json($notifications),
-                        activeTab: 'all',
+                        activeTab: "all",
                         filterNotifications() {
-                            if (this.activeTab === 'all') return this.notifications.data;
-                            if (this.activeTab === 'unread') return this.notifications.data.filter(n => !n.read_at);
+                            if (this.activeTab === "all") return this.notifications.data;
+                            if (this.activeTab === "unread") return this.notifications.data.filter(n => !n.read_at);
                             return this.notifications.data.filter(n => n.read_at);
                         },
                         async markAllAsRead() {
                             try {
-                                const response = await fetch('{{ route('notifications.markAllAsRead') }}', {
-                                    method: 'POST',
+                                const response = await fetch("{{ route('notifications.markAllAsRead') }}", {
+                                    method: "POST",
                                     headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                        'Accept': 'application/json'
+                                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                        "Accept": "application/json"
                                     }
                                 });
                                 if (response.ok) {
                                     this.notifications.data.forEach(n => n.read_at = new Date().toISOString());
                                 }
                             } catch (error) {
-                                console.error('Erreur lors du marquage des notifications:', error);
+                                console.error("Erreur lors du marquage des notifications:", error);
                             }
                         },
                         async markAsRead(id) {
                             try {
                                 const response = await fetch(`/notifications/${id}/mark-read`, {
-                                    method: 'POST',
+                                    method: "POST",
                                     headers: {
-                                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                                        'Accept': 'application/json'
+                                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                                        "Accept": "application/json"
                                     }
                                 });
                                 if (response.ok) {
@@ -102,10 +102,10 @@
                                     }
                                 }
                             } catch (error) {
-                                console.error('Erreur lors du marquage de la notification:', error);
+                                console.error("Erreur lors du marquage de la notification:", error);
                             }
                         }
-                    }">
+                    }'>
                         <div class="mb-6 flex justify-between items-center">
                             <div class="flex space-x-1">
                                 <button 
@@ -128,7 +128,7 @@
                                 </button>
                             </div>
                             <button 
-                                @click="markAllAsRead" 
+                                @click.prevent="markAllAsRead()" 
                                 class="text-sm font-medium text-indigo-600 hover:text-indigo-800 flex items-center"
                                 x-show="notifications.data.some(n => !n.read_at)">
                                 <i class="fas fa-check-double mr-1"></i> Tout marquer comme lu
@@ -160,7 +160,7 @@
                                                     <div class="mt-2 flex items-center text-xs text-gray-500">
                                                         <span class="mr-2" x-text="new Date(notification.created_at).toLocaleTimeString()"></span>
                                                         <button 
-                                                            @click.stop="markAsRead(notification.id)" 
+                                                            @click.stop.prevent="markAsRead(notification.id)" 
                                                             x-show="!notification.read_at"
                                                             class="ml-auto text-indigo-600 hover:text-indigo-800">
                                                             Marquer comme lu
@@ -193,4 +193,4 @@
             </div>
         </div>
     </div>
-</x-app-layout> 
+</x-app-layout>
