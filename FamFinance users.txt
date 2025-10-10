@@ -1,0 +1,9 @@
+Administrateur du site :
+Email : admin@famfinance.com
+Mot de passe : admin123
+Administrateur de famille :
+Email : admin.famille@famfinance.com
+Mot de passe : admin123
+Membre normal :
+Email : membre@famfinance.com
+Mot de passe : admin123
